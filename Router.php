@@ -13,43 +13,58 @@ class Router
         $this->routes['POST'][$uri] = $callback;
     }
 
+
     public function dispatch()
     {
         ob_start();
-        $basePath = '/';
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        if (strpos($uri, $basePath) === 0) {
-            $uri = substr($uri, strlen($basePath));
+        // 获取请求 URI
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri = rtrim($uri, '/'); // 去掉末尾斜杠
+        if ($uri === '') {
+            $uri = '/';
         }
 
-        $uri = rtrim($uri, '/') ?: '/';
         $method = $_SERVER['REQUEST_METHOD'];
+
 
         if (isset($this->routes[$method][$uri])) {
             call_user_func($this->routes[$method][$uri]);
+            ob_end_flush();
             return;
         }
 
 
         foreach ($this->routes[$method] ?? [] as $route => $callback) {
-            // Convert route with {param} to regex
+            // 转换 {param} 为正则
             $pattern = preg_replace('/\{(\w+)\}/', '([^/]+)', $route);
             $pattern = "@^" . rtrim($pattern, '/') . "$@";
 
             if (preg_match($pattern, $uri, $matches)) {
-                array_shift($matches); // Remove full match
+                array_shift($matches); // 移除完整匹配
                 call_user_func_array($callback, $matches);
+                ob_end_flush();
                 return;
             }
         }
 
+
         http_response_code(404);
+
+
         if (str_starts_with($uri, '/admin')) {
-            require './admin/admin404.php';
+            $errorPage = __DIR__ . '/admin/admin404.php';
         } else {
-            require './public/404.php';
+            $errorPage = __DIR__ . '/public/404.php';
         }
+
+        if (file_exists($errorPage)) {
+            require $errorPage;
+        } else {
+            echo "<h1>404 Not Found</h1>";
+            echo "<p>The requested URL '$uri' was not found on this server.</p>";
+        }
+
         ob_end_flush();
     }
 
