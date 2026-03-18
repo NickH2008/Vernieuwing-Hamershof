@@ -18,9 +18,8 @@ class Router
     {
         ob_start();
 
-        // 获取请求 URI
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $uri = rtrim($uri, '/'); // 去掉末尾斜杠
+        $uri = rtrim($uri, '/');
         if ($uri === '') {
             $uri = '/';
         }
@@ -36,12 +35,12 @@ class Router
 
 
         foreach ($this->routes[$method] ?? [] as $route => $callback) {
-            // 转换 {param} 为正则
+
             $pattern = preg_replace('/\{(\w+)\}/', '([^/]+)', $route);
             $pattern = "@^" . rtrim($pattern, '/') . "$@";
 
             if (preg_match($pattern, $uri, $matches)) {
-                array_shift($matches); // 移除完整匹配
+                array_shift($matches);
                 call_user_func_array($callback, $matches);
                 ob_end_flush();
                 return;
