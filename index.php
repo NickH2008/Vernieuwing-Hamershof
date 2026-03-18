@@ -1,13 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Winkelcentrum De Hamershof - Hamershof.nl</title>
-</head>
-<body>
+<?php
+require_once __DIR__ . '/autoloader.php';
+require_once __DIR__ . '/Router.php';
 
-</body>
-</html>
+$router = new Router();
+
+foreach (glob(__DIR__ . '/controllers/*.php') as $file) {
+    $className = pathinfo($file, PATHINFO_FILENAME);
+    new $className($router);
+}
+
+$router->dispatch();
