@@ -15,13 +15,16 @@
 <!-- tijdelijke link -->
 <a href="/public/winkels.php">winkels</a>
 
-<form method="POST" action="">
-    <input type="text" name="name" placeholder="Winkelnaam">
+<form id="registerForm" method="POST" action="">
+    <input type="text" name="winkelnaam" placeholder="Winkelnaam">
     <input type="text" name="category" placeholder="Categorie">
+    <input id="registerForm" method="POST" enctype="multipart/form-data" placeholder="foto">
     <input type="submit">
 </form>
+<div id="message"></div>
 
 
 
 </body>
+<script src="js_admin/winkels.js"></script>
 </html>
