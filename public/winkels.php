@@ -10,6 +10,30 @@
     <title>winkels view</title>
 </head>
 <body>
+<!-- tijdelijke link -->
+<a href="/admin/admin.php">admin</a>
+<h1>hoi</h1>
+<input type="text" id="searchInput" placeholder="Zoek een winkel">
+<div id="zoek-wrapper">
+    <ul id="zoek-list">
+        <button>alle winkels</button>
+        <button>mode & accesoires</button>
+        <button>eten & drinken</button>
+        <button>supermarkt</button>
+        <button>electronica</button>
+        <button>wonen & livestyle</button>
+        <button>restaurant</button>
+    </ul>
+</div>
+<hr>
+
+<div id="found"></div>
+
+<div id="winkels">
+    <ul id="winkels">
+        <!-- hier komen de winkels -->
+    </ul>
+</div>
     
 </body>
 </html>
