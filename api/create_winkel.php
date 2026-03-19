@@ -5,20 +5,15 @@ require "../config/db_config.php";
 session_start();
 header("Content-Type: application/json");
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["status" => "error"]);
-    exit;
+$winkelnaam = isset($_POST['winkelnaam']) ? $_POST['winkelnaam'] : '';
+
+if (empty($winkelnaam)) {
+    echo json_encode([
+        "status" => "success",
+        "message" => "Winkel succesvol toegevoegd"
+    ]);
 }
 
-$title = isset($_POST['title']) ? $_POST['title'] : '';
-$is_public = isset($_POST['is_public']) ? $_POST['is_public'] : 0;
-
-if (empty($title)) {
-    echo json_encode(["status" => "error", "message" => "Titel ontbreekt"]);
-    exit;
-}
-
-$stmt = $pdo->prepare("INSERT INTO winkels (id, winkelnaam, categorie, image) VALUES (?, ?, ?)");
-$stmt->execute([$_SESSION['user_id'], $title, $is_public]);
-
+$stmt = $pdo->prepare("INSERT INTO winkels (winkelnaam, categorie, image) VALUES (?, ?, ?)");
+$stmt->execute([$winkelnaam, $_POST['category'], $_FILES['picture']['name']]);
 echo json_encode(["status" => "success"]);

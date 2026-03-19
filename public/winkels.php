@@ -16,11 +16,11 @@
 <input type="text" id="searchInput" placeholder="Zoek een winkel">
 <div id="zoek-wrapper">
         <button>alle winkels</button>
-        <button>mode & accesoires</button>
-        <button>eten & drinken</button>
+        <button>mode&accesoires</button>
+        <button>eten&drinken</button>
         <button>supermarkt</button>
         <button>electronica</button>
-        <button>wonen & livestyle</button>
+        <button>wonen&livestyle</button>
         <button>restaurant</button>
 </div>
 <hr>
