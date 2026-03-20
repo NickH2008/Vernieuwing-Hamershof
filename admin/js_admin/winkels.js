@@ -8,14 +8,9 @@ if(registerForm){
             method: "POST",
             body: new FormData(this)
         })
-            .then(res => res.json())
+            .then(res => res.text()) // 👈 NIET json()
             .then(data => {
-                console.log(data); // 👈 kijk wat je echt terugkrijgt
-                if (data.status === "success"){
-                    alert(data.message)
-                } else {
-                    document.getElementById("message").innerText = data.message;
-                }
+                console.log(data); // 👈 hier zie je de echte error
             });
     });
 }
