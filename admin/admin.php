@@ -18,7 +18,8 @@
 <form id="registerForm" method="POST" action="">
     <input type="text" name="winkelnaam" placeholder="Winkelnaam">
     <input type="text" name="category" placeholder="Categorie">
-    <input id="registerForm" method="POST" enctype="multipart/form-data" placeholder="foto">
+    <form id="registerForm" method="POST" enctype="multipart/form-data">
+        <input type="file" name="picture" accept="image/*">
     <input type="submit">
 </form>
 <div id="message"></div>
