@@ -33,5 +33,5 @@
     </ul>
     
 </body>
-<script src="js_public/winkels.js"></script>
+<script src="../public/js_public/winkels.js"></script>
 </html>

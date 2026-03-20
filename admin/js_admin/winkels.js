@@ -8,6 +8,8 @@ if(registerForm){
             body: new FormData(this)
         })
             .then(res => res.text()) // 👈 NIET json()
-            .then(data => {});
+            .then(data => {
+                    alert("Winkel succesvol toegevoegd!");
+            });
     });
 }

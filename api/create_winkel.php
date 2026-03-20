@@ -40,8 +40,3 @@ $stmt = $pdo->prepare("
 ");
 
 $stmt->execute([$winkelnaam, $categorie, $image]);
-
-echo json_encode([
-    "status" => "success",
-    "message" => "Winkel toegevoegd"
-]);
