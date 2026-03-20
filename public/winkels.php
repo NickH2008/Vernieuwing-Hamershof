@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>winkels view</title>
+    <link rel="stylesheet" href="/public/css/winkels.css" type="text/css">
 </head>
 <body>
 <!-- tijdelijke link -->
@@ -27,11 +28,10 @@
 
 <div id="found"></div>
 
-<div id="winkels">
-    <ul id="winkels">
+    <ul id="winkelList">
         <!-- hier komen de winkels -->
     </ul>
-</div>
     
 </body>
+<script src="js_public/winkels.js"></script>
 </html>

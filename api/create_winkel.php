@@ -2,6 +2,7 @@
 
 $config = require "../config/db_config.php";
 
+
 try {
     $pdo = new PDO(
         "mysql:host={$config['servername']};dbname={$config['dbname']};charset=utf8",
@@ -22,7 +23,7 @@ session_start();
 header("Content-Type: application/json");
 
 $winkelnaam = $_POST['winkelnaam'] ?? '';
-$categorie = $_POST['category'] ?? '';
+$categorie = $_POST['categorie'] ?? '';
 $image = $_FILES['picture']['name'] ?? '';
 
 if (empty($winkelnaam)) {

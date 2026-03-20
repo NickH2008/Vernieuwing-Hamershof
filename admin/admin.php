@@ -1,5 +1,6 @@
 <?php
 
+
 ?>
 
 <!doctype html>
@@ -15,13 +16,25 @@
 <!-- tijdelijke link -->
 <a href="/public/winkels.php">winkels</a>
 
-<form id="registerForm" method="POST" action="">
+<form id="registerForm" method="POST" enctype="multipart/form-data">
+
     <input type="text" name="winkelnaam" placeholder="Winkelnaam">
-    <input type="text" name="category" placeholder="Categorie">
-    <form id="registerForm" method="POST" enctype="multipart/form-data">
-        <input type="file" name="picture" accept="image/*">
+
+    <label for="categorie">Kies een categorie:</label>
+    <select name="categorie" id="categorie">
+        <option value="mode&accesoires">mode & accesoires</option>
+        <option value="eten&drinken">eten & drinken</option>
+        <option value="supermarkt">supermarkt</option>
+        <option value="electronica">electronica</option>
+        <option value="wonen&livestyle">wonen & livestyle</option>
+        <option value="restaurant">restaurant</option>
+    </select>
+
+    <input type="file" name="picture" accept="image/*">
+
     <input type="submit">
 </form>
+
 <div id="message"></div>
 
 
