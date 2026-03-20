@@ -1,4 +1,3 @@
-console.log("Winkels JS geladen");
 const registerForm = document.getElementById("registerForm");
 if(registerForm){
     registerForm.addEventListener("submit", function(e){
@@ -9,8 +8,6 @@ if(registerForm){
             body: new FormData(this)
         })
             .then(res => res.text()) // 👈 NIET json()
-            .then(data => {
-                console.log(data); // 👈 hier zie je de echte error
-            });
+            .then(data => {});
     });
 }
