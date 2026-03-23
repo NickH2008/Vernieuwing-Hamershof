@@ -2,7 +2,6 @@
 
 $config = require "../config/db_config.php";
 
-
 try {
     $pdo = new PDO(
         "mysql:host={$config['servername']};dbname={$config['dbname']};charset=utf8",

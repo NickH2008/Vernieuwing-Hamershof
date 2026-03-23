@@ -12,7 +12,7 @@
 </head>
 <body>
 <!-- tijdelijke link -->
-<a href="/admin/admin.php">admin</a>
+<a href="/admin/admin">admin</a>
 <h1>hoi</h1>
 <input type="text" id="searchInput" placeholder="Zoek een winkel">
 <div id="zoek-wrapper">

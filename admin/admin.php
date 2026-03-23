@@ -40,5 +40,5 @@
 
 
 </body>
-<script src="js_admin/winkels.js"></script>
+<script src="js_admin/admin.js"></script>
 </html>

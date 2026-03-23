@@ -3,7 +3,7 @@ if(registerForm){
     registerForm.addEventListener("submit", function(e){
         e.preventDefault();
 
-        fetch("../api/create_winkel.php", {
+        fetch("/winkels/create", {
             method: "POST",
             body: new FormData(this)
         })
