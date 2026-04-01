@@ -4,6 +4,9 @@
     /*padding: 60px 40px 20px;*/
 
 }
+.footer svg {
+    height: 186px;
+}
 
 .footer-container {
     display: flex;

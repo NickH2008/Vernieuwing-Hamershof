@@ -11,6 +11,7 @@
     padding: 0 20px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     z-index: 1000;
+    transition: height 0.25s ease, padding 0.25s ease;
 }
 
 /* Layout */
@@ -18,6 +19,7 @@
 .header-center,
 .header-right {
     width: 33%;
+    transition: width 0.25s ease, opacity 0.2s ease;
 }
 
 /* Menu knop */
@@ -26,6 +28,7 @@
     border: none;
     cursor: pointer;
     padding: 5px;
+    transition: opacity 0.2s ease;
 }
 
 /* SVG icon */
@@ -45,8 +48,40 @@
     display: flex;
     justify-content: center;
 }
+.header-center svg {
+    /*width="209" height="42"*/
+    width: 209px;
+    height: 42px;
+
+}
 
 .logo {
     height: 40px;
     object-fit: contain;
+    transition: height 0.25s ease;
+}
+
+/* Compact state at page bottom: only keep the logo visible */
+.header.is-compact {
+    height: 52px;
+    padding: 0 12px;
+}
+
+.header.is-compact .header-left,
+.header.is-compact .header-right {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.header.is-compact .menu-btn {
+    opacity: 0;
+}
+
+.header.is-compact .header-center {
+    width: 100%;
+}
+
+.header.is-compact .logo {
+    height: 30px;
 }

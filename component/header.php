@@ -14,6 +14,6 @@
     <div class="header-center">
       <?php include __DIR__ . '/logo_header.php'; ?>
     </div>
-
     <div class="header-right"></div>
 </header>
+<script src="/component/header.js" defer></script>

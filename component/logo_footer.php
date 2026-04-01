@@ -1,4 +1,4 @@
-<svg width= height="186" viewBox="0 0 299 186" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg  viewBox="0 0 299 186" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_472_2646" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="52" width="26" height="39">
         <path d="M0 52.4578H25.768V90.5252H0V52.4578Z" fill="white"/>
     </mask>
