@@ -14,7 +14,9 @@
 </head>
 <body>
 <?php include_once __DIR__ . '/../component/header.php'; ?>
-<h1>404</h1>
+<main>
+    <h1>404</h1>
+</main>
 <?php include_once __DIR__ . '/../component/footer.php'; ?>
 </body>
 </html>

@@ -40,10 +40,8 @@
         </div>
 
         <!-- Logo -->
-        <div class="footer-logo">
-            <div class="logo">
+        <div class="footer-logo"    >
                 <?php include __DIR__ . '/logo_footer.php'; ?>
-            </div>
         </div>
 
     </div>
