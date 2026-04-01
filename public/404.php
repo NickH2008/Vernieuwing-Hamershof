@@ -8,12 +8,15 @@
     <link rel="stylesheet" href="/public/css/main.css">
     <link rel="stylesheet" href="/public/css/header.css">
     <link rel="stylesheet" href="/public/css/footer.css">
+    <link rel="stylesheet" href="/public/css/404.css">
 <!--    <link rel="icon" href="./public/assets/logo_icon.png" type="image/png">-->
     <title>Englify</title>
 </head>
 <body>
 <?php include_once __DIR__ . '/../component/header.php'; ?>
-<h1>404</h1>
+<main>
+    <h1>404</h1>
+</main>
 <?php include_once __DIR__ . '/../component/footer.php'; ?>
 </body>
 </html>

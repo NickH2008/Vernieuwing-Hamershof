@@ -2,4 +2,24 @@
 :root {
     --title-font:"Playfair Display", serif;;
     --body-font: 'Inter', Helvetica, sans-serif;
+    --black-color: #0A0A0A;
+    --white-color: #FFFFFF;
+    --gray-color: #E6E7E9;
+    --lightgray-color: #F9FAFB;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: var(--title-font);
+}
+p, ul, ol, dl, dt, dd{
+    font-family: var(--body-font);
+}
+
+body{
+    color: var(--black-color);
 }
