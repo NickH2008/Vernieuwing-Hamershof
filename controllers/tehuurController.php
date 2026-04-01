@@ -1,115 +1,45 @@
 <?php
+
 class tehuurController
 {
-    private $db;
+    private $tehuurService;
 
     public function __construct($router)
     {
         $router->get('/tehuur', [$this, 'index']);
-        $router->post('/api/create_rental', [$this, 'createRental']);
-        $this->db = new databaseController();
+        $router->post('/tehuur/create', [$this, 'createRental']);
+        $this->tehuurService = new tehuurService();
     }
 
+    /**
+     * Display the rental page
+     */
     public function index()
     {
         require __DIR__ . '/../public/tehuur.php';
     }
 
+    /**
+     * Handle rental request creation
+     */
     public function createRental()
     {
+        // Set JSON response header
         header("Content-Type: application/json");
 
-        $contactName = $_POST['contact_name'] ?? '';
-        $contactEmail = $_POST['contact_email'] ?? '';
-        $contactPhone = $_POST['contact_phone'] ?? '';
-        $shopName = $_POST['shop_name'] ?? '';
-        $shopCategory = $_POST['shop_category'] ?? '';
-        $shopDescription = $_POST['shop_description'] ?? '';
-        $preferredSize = $_POST['preferred_size'] ?? null;
-        $preferredLocation = $_POST['preferred_location'] ?? '';
-        $startDate = $_POST['start_date'] ?? null;
-        $termsAccepted = isset($_POST['terms']) ? 1 : 0;
+        try {
+            // Get the rental request data from service
+            $result = $this->tehuurService->createRentalRequest($_POST, $_FILES);
 
-        // Validate required fields
-        if (empty($contactName) || empty($contactEmail) || empty($contactPhone) || empty($shopName) || empty($shopCategory)) {
+            // Return JSON response
+            echo json_encode($result);
+
+        } catch (Exception $e) {
+            // Handle unexpected errors
+            error_log("Controller error: " . $e->getMessage());
             echo json_encode([
                 "status" => "error",
-                "message" => "Vul alle verplichte velden in (*)"
-            ]);
-            exit;
-        }
-
-        // Validate email format
-        if (!filter_var($contactEmail, FILTER_VALIDATE_EMAIL)) {
-            echo json_encode([
-                "status" => "error",
-                "message" => "Voer een geldig e-mailadres in"
-            ]);
-            exit;
-        }
-
-        // Check if terms are accepted
-        if (!$termsAccepted) {
-            echo json_encode([
-                "status" => "error",
-                "message" => "U moet akkoord gaan met de algemene voorwaarden"
-            ]);
-            exit;
-        }
-
-        // Handle file uploads
-        $businessPlanPath = '';
-        $logoPath = '';
-
-        // Create uploads directory if it doesn't exist
-        $uploadDir = __DIR__ . '/../uploads/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
-
-        // Handle business plan upload
-        if (isset($_FILES['business_plan']) && $_FILES['business_plan']['error'] === UPLOAD_ERR_OK) {
-            $businessPlanName = basename($_FILES['business_plan']['name']);
-            $businessPlanPath = $uploadDir . 'business_plan_' . time() . '_' . $businessPlanName;
-            move_uploaded_file($_FILES['business_plan']['tmp_name'], $businessPlanPath);
-            $businessPlanPath = str_replace(__DIR__ . '/../', '', $businessPlanPath); // Store relative path
-        }
-
-        // Handle logo upload
-        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-            $logoName = basename($_FILES['logo']['name']);
-            $logoPath = $uploadDir . 'logo_' . time() . '_' . $logoName;
-            move_uploaded_file($_FILES['logo']['tmp_name'], $logoPath);
-            $logoPath = str_replace(__DIR__ . '/../', '', $logoPath); // Store relative path
-        }
-
-        // Insert rental request into database
-        $sql = "INSERT INTO rental_requests (
-            contact_name, contact_email, contact_phone,
-            shop_name, shop_category, shop_description,
-            preferred_size, preferred_location, start_date,
-            business_plan_path, logo_path, terms_accepted,
-            created_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-
-        $params = [
-            $contactName, $contactEmail, $contactPhone,
-            $shopName, $shopCategory, $shopDescription,
-            $preferredSize, $preferredLocation, $startDate,
-            $businessPlanPath, $logoPath, $termsAccepted
-        ];
-
-        $result = $this->db->save($sql, $params);
-
-        if ($result) {
-            echo json_encode([
-                "status" => "success",
-                "message" => "Uw huurverzoek is succesvol verzonden. Wij nemen zo snel mogelijk contact met u op."
-            ]);
-        } else {
-            echo json_encode([
-                "status" => "error",
-                "message" => "Er is een fout opgetreden bij het opslaan van uw verzoek. Probeer het opnieuw."
+                "message" => "Er is een onverwachte fout opgetreden. Probeer het opnieuw."
             ]);
         }
     }
