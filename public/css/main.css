@@ -16,6 +16,7 @@
 
 h1, h2, h3, h4, h5, h6{
     font-family: var(--title-font);
+    font-weight: 500;
 }
 p, ul, ol, dl, dt, dd{
     font-family: var(--body-font);
@@ -39,7 +40,7 @@ body{
 .page-title-container h1{
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    font-weight: 500;
+
 
 }
 .page-title-container p{
