@@ -113,4 +113,25 @@ CREATE TABLE IF NOT EXISTS `agenda` (
       ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS rental_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    contact_name VARCHAR(255) NOT NULL,
+    contact_email VARCHAR(255) NOT NULL,
+    contact_phone VARCHAR(20) NOT NULL,
+    shop_name VARCHAR(255) NOT NULL,
+    shop_category VARCHAR(100) NOT NULL,
+    shop_description TEXT,
+    preferred_size INT NULL,
+    preferred_location VARCHAR(50),
+    start_date DATE NULL,
+    business_plan_path VARCHAR(500),
+    logo_path VARCHAR(500),
+    terms_accepted TINYINT(1) NOT NULL DEFAULT 0,
+    status ENUM('pending', 'reviewed', 'approved', 'rejected') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_status (status),
+    INDEX idx_created_at (created_at)
+) ENGINE=InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
