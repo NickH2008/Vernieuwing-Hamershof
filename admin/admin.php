@@ -15,17 +15,25 @@
 
     <input type="text" name="winkel_name" placeholder="Winkelnaam">
 
-    <label for="categorie">Kies een categorie:</label>
+    <label for="category_id">Kies een categorie:</label>
     <select name="category_id" id="category_id">
-        <option value="mode&accesoires">mode & accesoires</option>
-        <option value="eten&drinken">eten & drinken</option>
-        <option value="supermarkt">supermarkt</option>
-        <option value="electronica">electronica</option>
-        <option value="wonen&livestyle">wonen & livestyle</option>
-        <option value="restaurant">restaurant</option>
+        <option value="">Categorieën laden...</option>
     </select>
 
-    <input type="file" name="picture" accept="image/*">
+    <input type="text" name="description" placeholder="Beschrijving">
+
+    <input type="file" name="cover_image" accept="image/*">
+
+    <input type="file" name="logo" accept="image/*">
+
+
+    <input type="tel" name="phone" placeholder="Telefoonnummer">
+
+    <input type="email" name="email" placeholder="E-mail">
+
+    <input type="text" name="website" placeholder="Website">
+
+    <input type="text" name="location" placeholder="Locatie">
 
     <input type="submit">
 </form>
