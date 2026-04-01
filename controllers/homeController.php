@@ -9,6 +9,6 @@ class homeController
     }
 
     public function index(){
-        include __DIR__ . '/../view/home.php';
+        include __DIR__ . '/../public/home.php';
     }
 }
