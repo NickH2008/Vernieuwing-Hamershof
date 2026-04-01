@@ -9,4 +9,4 @@ foreach (glob(__DIR__ . '/controllers/*.php') as $file) {
     new $className($router);
 }
 
-$router->dispatch();
+$router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

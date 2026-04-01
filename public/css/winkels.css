@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#winkelList{
+    margin: 20px auto;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    border: red solid 1px;
+}
