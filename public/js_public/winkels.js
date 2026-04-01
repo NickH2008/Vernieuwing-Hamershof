@@ -5,6 +5,7 @@ fetch("../api/get_winkels.php")
         data.forEach(winkel => {
             const li = document.createElement("li");
             li.textContent = winkel.winkelnaam + " - " + winkel.categorie;
+            
             winkelList.appendChild(li);
 
         });
