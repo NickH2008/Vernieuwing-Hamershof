@@ -75,7 +75,8 @@
         </section>
 
         <section class="tehuur-contact-aanvraag">
-            <div class="contact-blok">
+            <div class="contact-aanvraag-container">
+                <div class="contact-blok">
                 <h3>Interesse in een Pand?</h3>
                 <p>Neem contact met ons op voor meer informatie over beschikbare winkelruimtes, huurvoorwaarden en bezichtigingen. Ons team helpt u graag verder om de perfecte locatie voor uw bedrijf te vinden.</p>
                 <div class="contact-info">
@@ -131,6 +132,7 @@
                     <button type="submit" class="submit-btn">Verstuur Aanvraag</button>
                 </form>
                 <div id="responseMessage" class="response-message" style="display: none;"></div>
+            </div>
             </div>
         </section>
 
