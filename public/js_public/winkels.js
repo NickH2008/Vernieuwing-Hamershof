@@ -1,8 +1,9 @@
 fetch("/api/get_winkels")
     .then(res => res.json())
     .then(data => {
+        console.log(data);
         const winkelList = document.getElementById("winkelList");
-        data.forEach(winkels => {
+        data.data.forEach(winkels => {
             const li = document.createElement("li");
             li.className = "winkels-li";
 
