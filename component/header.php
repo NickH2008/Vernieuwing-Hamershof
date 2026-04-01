@@ -12,7 +12,7 @@
     </div>
 
     <div class="header-center">
-      <?php include __DIR__ . '/logo_header.php'; ?>
+      <a href="../public/home.php"> <?php include __DIR__ . '/logo_header.php'; ?> </a>
     </div>
     <div class="header-right"></div>
 </header>

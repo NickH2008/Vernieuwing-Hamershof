@@ -1,35 +1,10 @@
 main{
-    min-height:100vh ;
-}
-
-.simple-404 {
     min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 0.75rem;
-    padding: 1.5rem;
+    display: grid;
+    object-fit: fill;
+}
+.page-title-container {
+   display: flex;
+    margin: auto 0;
 }
 
-.simple-404 h1 {
-    margin: 0;
-    font-size: 3rem;
-}
-
-.simple-404 p {
-    margin: 0;
-    color: #555;
-}
-
-.simple-404 a {
-    margin-top: 0.5rem;
-    color: #1f4f8c;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.simple-404 a:hover {
-    text-decoration: underline;
-}

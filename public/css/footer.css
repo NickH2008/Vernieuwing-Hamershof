@@ -27,14 +27,27 @@
 /* Links */
 .footer-links {
     flex: 1;
+    width: 20px;
 }
 
 .footer-links h3 {
     margin-bottom: 20px;
-    border-bottom: 1px solid #fff;
-    display: inline-block;
     padding-bottom: 5px;
+    position: relative;
+    display: inline-block;
+    border-bottom: none;
 }
+
+.footer-links h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 345px; /* change this */
+    height: 1px;
+    background: #fff;
+}
+
 
 .footer-links-grid {
     display: flex;
@@ -53,10 +66,31 @@
 .footer-links-grid a {
     color: #fff;
     text-decoration: none;
+    position: relative;
+    display: inline-block;
 }
 
-.footer-links-grid a:hover {
-    text-decoration: underline;
+.footer-links-grid a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+}
+
+.footer-links-grid a:hover::after,
+.footer-links-grid a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.footer-links-grid a:hover,
+.footer-links-grid a:focus-visible {
+    text-decoration: none;
 }
 
 .footer-extra {
@@ -66,6 +100,31 @@
 
 .footer-extra a {
     color: #fff;
+    text-decoration: none;
+    position: relative;
+}
+
+.footer-extra a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+}
+
+.footer-extra a:hover::after,
+.footer-extra a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+.footer-extra a:hover,
+.footer-extra a:focus-visible {
+    text-decoration: none;
 }
 
 /* Logo */
