@@ -14,15 +14,18 @@ class winkelsController
 
     public function index()
     {
+        echo "Debug: winkelsController index called\n";
         require __DIR__ . '/../public/winkels.php';
     }
     public function create()
     {
         header("Content-Type: application/json");
+        echo "Debug: create called\n";
 
         $winkelnaam = $_POST['winkel_name'] ?? '';
-        $categorie = $_POST['category'] ?? '';
-        $image = $_FILES['picture']['name'] ?? '';
+        $categorie = 1;
+        $image = $_FILES['cover_image']['name'] ?? '';
+        echo "Debug: winkelnaam=$winkelnaam, categorie=$categorie, image=$image\n";
 
         if (empty($winkelnaam)) {
             echo json_encode([
@@ -31,13 +34,15 @@ class winkelsController
             ]);
             exit;
         }
+        echo "Debug: proceeding to insert\n";
 
-        $sql = "INSERT INTO winkels (winkelnaam, categorie, image) VALUES (?, ?, ?)";
-        $this->db->save($sql, [$winkelnaam, $categorie, $image]);
+        $sql = "INSERT INTO winkels (winkel_name, category_id) VALUES (?, ?)";
+        $result = $this->db->save($sql, [$winkelnaam, $categorie]);
+        echo "Debug: save result=" . ($result ? 'true' : 'false') . "\n";
 
         echo json_encode([
             "status" => "success",
-            "message" => "Winkel succesvol aangemaakt"
+            "message" => "Winkel succesvol aangemaakt",
         ]);
     }
 
@@ -45,13 +50,13 @@ class winkelsController
     {
         header("Content-Type: application/json");
 
-        // Query uitvoeren
-        $sql = "SELECT winkel_name, category_id, cover_image FROM winkels";
+        $sql = "SELECT winkel_name, category_id FROM winkels";
         $winkels = $this->db->read($sql);
 
-
-        // JSON terugsturen
-        echo json_encode($winkels);
+        echo json_encode([
+            "status" => "success",
+            "data" => $winkels
+        ]);
     }
 
 }

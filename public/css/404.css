@@ -1,3 +1,10 @@
 main{
-    min-height:100vh ;
+    min-height: 70vh;
+    display: grid;
+    object-fit: fill;
 }
+.page-title-container {
+   display: flex;
+    margin: auto 0;
+}
+

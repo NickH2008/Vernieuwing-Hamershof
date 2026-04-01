@@ -13,10 +13,10 @@
 
 <form id="registerForm" method="POST" enctype="multipart/form-data">
 
-    <input type="text" name="winkelnaam" placeholder="Winkelnaam">
+    <input type="text" name="winkel_name" placeholder="Winkelnaam">
 
     <label for="categorie">Kies een categorie:</label>
-    <select name="categorie" id="categorie">
+    <select name="category_id" id="category_id">
         <option value="mode&accesoires">mode & accesoires</option>
         <option value="eten&drinken">eten & drinken</option>
         <option value="supermarkt">supermarkt</option>
