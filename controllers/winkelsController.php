@@ -8,7 +8,8 @@ class winkelsController
         $router->post('/winkels/create', [$this, 'create']);
         $router->get('/admin', [$this, 'index']);
         $router->post('/admin/create', [$this, 'create']);
-        $this->db=new databaseController();
+        $router->get('/api/get_winkels', [$this, 'get_winkels']);
+        $this->db = new databaseController();
     }
 
     public function index()
@@ -19,8 +20,8 @@ class winkelsController
     {
         header("Content-Type: application/json");
 
-        $winkelnaam = $_POST['winkelnaam'] ?? '';
-        $categorie = $_POST['categorie'] ?? '';
+        $winkelnaam = $_POST['winkel_name'] ?? '';
+        $categorie = $_POST['category'] ?? '';
         $image = $_FILES['picture']['name'] ?? '';
 
         if (empty($winkelnaam)) {
@@ -38,6 +39,19 @@ class winkelsController
             "status" => "success",
             "message" => "Winkel succesvol aangemaakt"
         ]);
+    }
+
+    public function get_winkels()
+    {
+        header("Content-Type: application/json");
+
+        // Query uitvoeren
+        $sql = "SELECT winkel_name, category_id, cover_image FROM winkels";
+        $winkels = $this->db->read($sql);
+
+
+        // JSON terugsturen
+        echo json_encode($winkels);
     }
 
 }
