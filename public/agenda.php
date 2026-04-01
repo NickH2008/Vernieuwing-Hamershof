@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/public/css/main.css">
     <link rel="stylesheet" href="/public/css/header.css">
     <link rel="stylesheet" href="/public/css/footer.css">
-    <link rel="stylesheet" href="/public/css/404.css">
+    <link rel="stylesheet" href="/public/css/agenda.css">
     <!--    <link rel="icon" href="./public/assets/logo_icon.png" type="image/png">-->
     <title>Hamershof</title>
 </head>
