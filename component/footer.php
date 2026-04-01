@@ -17,7 +17,7 @@
         <!-- Quick Links -->
         <div class="footer-links">
             <h3>Quick links</h3>
-            <div class="links-grid">
+            <div class="footer-links-grid">
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Te Huur</a></li>

@@ -33,26 +33,26 @@
     padding-bottom: 5px;
 }
 
-.links-grid {
+.footer-links-grid {
     display: flex;
     gap: 60px;
 }
 
-.links-grid ul {
+.footer-links-grid ul {
     list-style: none;
     padding: 0;
 }
 
-.links-grid li {
+.footer-links-grid li {
     margin-bottom: 8px;
 }
 
-.links-grid a {
+.footer-links-grid a {
     color: #fff;
     text-decoration: none;
 }
 
-.links-grid a:hover {
+.footer-links-grid a:hover {
     text-decoration: underline;
 }
 
