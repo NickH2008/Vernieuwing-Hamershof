@@ -15,9 +15,13 @@
 <body>
 <?php include_once __DIR__ . '/../component/header.php'; ?>
 <main class="simple-404">
-    <h1>404</h1>
-    <p>Pagina niet gevonden.</p>
-    <a href="home.php">Terug naar home</a>
+
+    <div class="page-title-container">
+        <h1>404</h1>
+        <p>Pagina niet gevonden.</p>
+        <a href="home.php">Terug naar home</a>
+    </div>
+
 </main>
 <?php include_once __DIR__ . '/../component/footer.php'; ?>
 </body>

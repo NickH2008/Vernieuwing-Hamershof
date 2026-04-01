@@ -9,6 +9,7 @@ class winkelsController
         $router->get('/admin', [$this, 'index']);
         $router->post('/admin/create', [$this, 'create']);
         $router->get('/api/get_winkels', [$this, 'get_winkels']);
+        $router->get('/api/get_categories', [$this, 'get_categories']);
         $this->db = new databaseController();
     }
 
@@ -20,12 +21,16 @@ class winkelsController
     public function create()
     {
         header("Content-Type: application/json");
-        echo "Debug: create called\n";
 
         $winkelnaam = $_POST['winkel_name'] ?? '';
-        $categorie = 1;
-        $image = $_FILES['cover_image']['name'] ?? '';
-        echo "Debug: winkelnaam=$winkelnaam, categorie=$categorie, image=$image\n";
+        $categorie = $_POST['category_id'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $logo = $_POST['logo'] ?? '';
+        $image = $_FILES['picture']['name'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $website = $_POST['website'] ?? '';
+        $location = $_POST['location'] ?? '';
 
         if (empty($winkelnaam)) {
             echo json_encode([
@@ -34,15 +39,33 @@ class winkelsController
             ]);
             exit;
         }
-        echo "Debug: proceeding to insert\n";
 
-        $sql = "INSERT INTO winkels (winkel_name, category_id) VALUES (?, ?)";
-        $result = $this->db->save($sql, [$winkelnaam, $categorie]);
-        echo "Debug: save result=" . ($result ? 'true' : 'false') . "\n";
+        $sql = "INSERT INTO winkels (winkel_name, category_id, description, logo, cover_image, phone, email, website, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $result = $this->db->save($sql, [$winkelnaam, $categorie, $description, $logo, $image, $phone, $email, $website, $location]);
+
+        if ($result) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "Winkel succesvol aangemaakt"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Er is een fout opgetreden bij het opslaan"
+            ]);
+        }
+    }
+
+    public function get_categories()
+    {
+        header("Content-Type: application/json");
+
+        $sql = "SELECT category_id, category_name FROM winkel_categories";
+        $categories = $this->db->read($sql);
 
         echo json_encode([
             "status" => "success",
-            "message" => "Winkel succesvol aangemaakt",
+            "data" => $categories
         ]);
     }
 
@@ -50,7 +73,7 @@ class winkelsController
     {
         header("Content-Type: application/json");
 
-        $sql = "SELECT winkel_name, category_id FROM winkels";
+        $sql = "SELECT * FROM winkels";
         $winkels = $this->db->read($sql);
 
         echo json_encode([

@@ -46,7 +46,7 @@
 
     </div>
 
-    <div class="footer-bottom">
+    <p class="footer-bottom">
         © 2026 Belangenvereniging de Hamershof - Powered By Dragon Media Group.
-    </div>
+    </p>
 </footer>

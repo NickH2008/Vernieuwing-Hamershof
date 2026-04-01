@@ -1,25 +1,41 @@
-fetch("/api/get_winkels")
+let categoryMap = {};
+
+// First, load categories
+fetch("/api/get_categories")
     .then(res => res.json())
     .then(data => {
-        console.log(data);
-        const winkelList = document.getElementById("winkelList");
-        data.data.forEach(winkels => {
-            const li = document.createElement("li");
-            li.className = "winkels-li";
-
-            const img = document.createElement("img");
-            img.src = winkels.cover_image;
-            img.style.width = "100px";
-            img.style.height = "100px";
-            img.style.padding = "15px";
-
-            const text = document.createTextNode(winkels.winkel_name + "-" + winkels.category_id);
-
-            li.appendChild(img);
-            li.appendChild(text);
-
-            winkelList.appendChild(li);
-        });
+        if (data.status === "success" && data.data) {
+            data.data.forEach(category => {
+                categoryMap[category.category_id] = category.category_name;
+            });
+        }
+        // Then load winkels after categories are loaded
+        return fetch("/api/get_winkels");
     })
-    .catch(err => console.error("Error fetching winkels:", err));
+    .then(res => res.json())
+    .then(data => {
+        console.log("Winkels data:", data);
+        if (data.status === "success" && data.data) {
+            const winkelList = document.getElementById("winkelList");
+            data.data.forEach(winkel => {
+                const li = document.createElement("li");
+                li.className = "winkels-li";
+
+                const img = document.createElement("img");
+                img.src = winkel.cover_image;
+                img.style.width = "100px";
+                img.style.height = "100px";
+                img.style.padding = "15px";
+
+                const categoryName = categoryMap[winkel.category_id] || "Onbekend";
+                const text = document.createTextNode(winkel.winkel_name + " - " + categoryName);
+
+                li.appendChild(img);
+                li.appendChild(text);
+
+                winkelList.appendChild(li);
+            });
+        }
+    })
+    .catch(err => console.error("Error fetching data:", err));
 

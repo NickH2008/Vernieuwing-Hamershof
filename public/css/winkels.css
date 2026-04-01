@@ -6,16 +6,9 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    list-style: none;
 }
 
 button {
     font-family: var(--title-font) ;
-}
-
-#winkels-li {
-    list-style: none;
-    display: inline-block;
-    width: 30%;
-    padding: 16px;
-    border: 1px solid blue;
 }
