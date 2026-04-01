@@ -1,0 +1,116 @@
+SET @OLD_SQL_MODE=@@SQL_MODE;
+SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+CREATE SCHEMA IF NOT EXISTS `hamershof` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `hamershof`;
+
+CREATE TABLE IF NOT EXISTS `winkel_categories` (
+  `category_id` INT NOT NULL AUTO_INCREMENT,
+  `category_name` VARCHAR(100) NOT NULL UNIQUE,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `role` VARCHAR(45) NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `winkels` (
+  `winkel_id` INT NOT NULL AUTO_INCREMENT,
+  `winkel_name` VARCHAR(100) NOT NULL,
+  `category_id` INT NOT NULL,
+  `description` TEXT NULL,
+  `logo` VARCHAR(255) NULL,
+  `cover_image` VARCHAR(255) NULL,
+  `phone` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `website` VARCHAR(255) NULL,
+  `location` VARCHAR(100) NULL,
+  `opening_hours` TEXT NULL,
+  `owner_id` INT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`winkel_id`),
+  INDEX (`category_id`),
+  INDEX (`owner_id`),
+  FOREIGN KEY (`category_id`) REFERENCES `winkel_categories` (`category_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`)
+      ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `winkel_images` (
+  `image_id` INT NOT NULL AUTO_INCREMENT,
+  `winkel_id` INT NOT NULL,
+  `image_path` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`image_id`),
+  INDEX (`winkel_id`),
+  FOREIGN KEY (`winkel_id`) REFERENCES `winkels` (`winkel_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `news_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `news_title` VARCHAR(255) NULL,
+  `content` TEXT NULL,
+  `cover_image` VARCHAR(255) NULL,
+  `published_at` TIMESTAMP NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`news_id`),
+  INDEX (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `news_image` (
+  `image_id` INT NOT NULL AUTO_INCREMENT,
+  `news_id` INT NOT NULL,
+  `image_path` VARCHAR(255) NULL,
+  PRIMARY KEY (`image_id`),
+  INDEX (`news_id`),
+  FOREIGN KEY (`news_id`) REFERENCES `news` (`news_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `winkel_services` (
+  `service_id` INT NOT NULL AUTO_INCREMENT,
+  `winkel_id` INT NOT NULL,
+  `service_title` VARCHAR(255) NOT NULL,
+  `description` TEXT NULL,
+  `service_link` VARCHAR(255) NULL,
+  PRIMARY KEY (`service_id`),
+  INDEX (`winkel_id`),
+  FOREIGN KEY (`winkel_id`) REFERENCES `winkels` (`winkel_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `map_areas` (
+  `map_area_id` INT NOT NULL AUTO_INCREMENT,
+  `winkel_id` INT NOT NULL,
+  `coordinate` TEXT NULL,
+  PRIMARY KEY (`map_area_id`),
+  INDEX (`winkel_id`),
+  FOREIGN KEY (`winkel_id`) REFERENCES `winkels` (`winkel_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `agenda` (
+  `agenda_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `activity_name` VARCHAR(255) NULL,
+  `color` VARCHAR(45) NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`agenda_id`),
+  INDEX (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+      ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
