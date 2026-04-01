@@ -43,24 +43,20 @@ class winkelsController
         echo json_encode([
             "status" => "success",
             "message" => "Winkel succesvol aangemaakt",
-            "data"=>$categorie.$winkelnaam.$image
         ]);
     }
 
     public function get_winkels()
     {
         header("Content-Type: application/json");
-        echo "Debug: get_winkels called\n";
 
-        $sql = "SELECT winkel_name, category_id, description, cover_image FROM winkels";
+        $sql = "SELECT winkel_name, category_id FROM winkels";
         $winkels = $this->db->read($sql);
-        if ($winkels !== false) {
-            echo "Debug: found " . count($winkels) . " winkels\n";
-        } else {
-            echo "Debug: query failed or no data\n";
-        }
 
-        echo json_encode($winkels);
+        echo json_encode([
+            "status" => "success",
+            "data" => $winkels
+        ]);
     }
 
 }
