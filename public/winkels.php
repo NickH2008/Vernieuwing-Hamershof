@@ -39,8 +39,8 @@
 <ul id="winkelList">
     <!-- hier komen de winkels -->
 </ul>
-<?php include_once __DIR__ . '/../component/footer.php'; ?>
 
+<?php include_once __DIR__ . '/../component/footer.php'; ?>
 
 </body>
 <script src="../public/js_public/winkels.js"></script>
