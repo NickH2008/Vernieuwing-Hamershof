@@ -16,4 +16,4 @@
     </div>
     <div class="header-right"></div>
 </header>
-<script src="/component/header.js" defer></script>
+<script src="/public/js_public/header.js" defer></script>
