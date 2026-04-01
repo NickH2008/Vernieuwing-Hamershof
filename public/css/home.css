@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title-font);
+}
+
+.home-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.intro-description {
+    position: absolute;
+    right: 5rem;
+    bottom: 8rem;
+    color: white;
+    width: 24%;
+    z-index: 2;
+}
+
+/*lijntjes*/
+.intro-description::before,
+.intro-description::after {
+    content: "";
+    position: absolute;
+    left: 2.2rem;
+    width: 7rem;
+    height: 0.35rem;
+    background: white;
+    transform: rotate(-62deg);
+    transform-origin: left center;
+}
+
+/* lijn boven */
+.intro-description::before {
+    top: -1.5rem;
+    left: 22rem;
+}
+
+/* lijn onder */
+.intro-description::after {
+    bottom: -8rem;
+    left: 7rem;
+}
+
+/* gekke schaduw */
+.home-intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: linear-gradient(
+            125deg,
+            rgba(0,0,0,0) 50%,
+            rgba(0,0,0,0.15) 60%,
+            rgba(0,0,0,0.55) 70%,
+            rgba(0,0,0,85) 100%
+    );
+
+    z-index: 1;
+}
+
+.intro-description h1,
+.intro-description h2,
+.intro-description p {
+    margin: 0;
+}
+
+.intro-description h1,
+.intro-description h2 {
+    line-height: 1;
+}
+
+.intro-description h1 {
+    font-size: 4rem;
+}
+
+.intro-description h2 {
+    font-size: 7rem;
+}
+
+.intro-description p {
+    margin-top: 0.5rem;
+    line-height: 1.2;
+    font-size: 1.8rem;
+}
