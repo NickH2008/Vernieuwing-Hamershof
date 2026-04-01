@@ -6,6 +6,7 @@
     --white-color: #FFFFFF;
     --gray-color: #E6E7E9;
     --lightgray-color: #F9FAFB;
+    --darkgray-color: #4A5565;
 }
 *{
     box-sizing: border-box;
@@ -22,4 +23,26 @@ p, ul, ol, dl, dt, dd{
 
 body{
     color: var(--black-color);
+}
+.page-title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    background:var(--lightgray-color);
+}
+.page-title-container *{
+    max-width: 650px;
+    text-align: center;
+}
+.page-title-container h1{
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+
+}
+.page-title-container p{
+    font-size: 1rem;
+    color: var(--darkgray-color);
 }
