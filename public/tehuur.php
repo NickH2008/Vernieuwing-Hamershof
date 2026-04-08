@@ -36,7 +36,7 @@
                         <li>125 m²</li>
                     </ul>
                     <p>Moderne winkelruimte in het hart van het winkelcentrum met veel daglicht en uitstekende zichtbaarheid.</p>
-                    <button class="meer-info-btn">Meer Informatie</button>
+                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/ruime-winkelunit-centrum'">Meer Informatie</button>
                 </div>
                 <div class="pand-card">
                     <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Hoekpand met Etalage"></div>
@@ -47,7 +47,7 @@
                         <li>85 m²</li>
                     </ul>
                     <p>Strategisch gelegen hoekpand met extra etalageruimte en hoge voetgangersfrequentie.</p>
-                    <button class="meer-info-btn">Meer Informatie</button>
+                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/hoekpand-met-etalage'">Meer Informatie</button>
                 </div>
                 <div class="pand-card">
                     <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Compacte Retail Space"></div>
@@ -58,7 +58,7 @@
                         <li>55 m²</li>
                     </ul>
                     <p>Ideale ruimte voor specialty retail of dienstverlening, volledig gerenoveerd.</p>
-                    <button class="meer-info-btn">Meer Informatie</button>
+                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/compacte-retail-space'">Meer Informatie</button>
                 </div>
                 <div class="pand-card">
                     <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Premium Winkelruimte"></div>
@@ -69,7 +69,7 @@
                         <li>180 m²</li>
                     </ul>
                     <p>Grote winkelunit met hoge plafonds en flexibele indeling, perfect voor flagship stores.</p>
-                    <button class="meer-info-btn">Meer Informatie</button>
+                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/premium-winkelruimte'">Meer Informatie</button>
                 </div>
             </div>
         </section>
