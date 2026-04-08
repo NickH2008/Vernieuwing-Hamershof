@@ -12,7 +12,7 @@
     </div>
 
     <div class="header-center">
-        <a href="../public/home.php" aria-label="Ga naar home"><?php include __DIR__ . '/logo_header.php'; ?></a>
+        <a href="home" aria-label="Ga naar home"><?php include __DIR__ . '/logo_header.php'; ?></a>
     </div>
 
     <div class="header-right"></div>
@@ -36,7 +36,7 @@
         </button>
 
         <div class="menu-logo">
-            <a href="../public/home.php" aria-label="Ga naar home">
+            <a href="home" aria-label="Ga naar home">
                 <?php include __DIR__ . '/logo_menu_header.php'; ?>
             </a>
         </div>
