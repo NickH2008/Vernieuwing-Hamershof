@@ -80,41 +80,13 @@
                 <span>Zo</span>
             </div>
             <div class="calendar-days">
-                <div>
-                    <span class="day">1</span>
-                </div>
-                <div>
-                    <span class="day">2</span>
-                </div>
 
-                <div>
-                    <span class="day">3</span>
-                </div>
-                <div>
-                    <span class="day">1</span>
-                </div>
-                <div>
-                    <span class="day">2</span>
-                </div>
-
-                <div>
-                    <span class="day">3</span>
-                </div>
-                <div>
-                    <span class="day">1</span>
-                </div>
-                <div>
-                    <span class="day">2</span>
-                </div>
-
-                <div>
-                    <span class="day">3</span>
-                </div>
             </div>
         </div>
     </section>
 
 </main>
 <?php include_once __DIR__ . '/../component/footer.php'; ?>
+<script src="/public/js_public/agenda.js"></script>
 </body>
 </html>
