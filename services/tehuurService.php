@@ -2,7 +2,7 @@
 
 class tehuurService
 {
-    private $db;
+    public $db;
 
     public function __construct()
     {

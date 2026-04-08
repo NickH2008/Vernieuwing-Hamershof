@@ -27,50 +27,19 @@
             <h2 class="aanbod-title">Beschikbare Panden</h2>
             <p class="aanbod-subtitle">Hamershof biedt diverse mogelijkheden voor retailers, horecagelegenheden en dienstverlenende bedrijven. Bekijk hieronder ons huidige aanbod.</p>
             <div class="pand-grid">
+                <?php foreach ($properties as $slug => $pand): ?>
                 <div class="pand-card">
-                    <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Ruime Winkelunit Centrum"></div>
-                    <span class="pand-badge beschikbaar">Beschikbaar</span>
-                    <h3>Ruime Winkelunit Centrum</h3>
+                    <div class="pand-image"><img src="<?php echo htmlspecialchars($pand['image']); ?>" alt="<?php echo htmlspecialchars($pand['title']); ?>"></div>
+                    <span class="pand-badge <?php echo htmlspecialchars($pand['statusClass']); ?>"><?php echo htmlspecialchars($pand['availability']); ?></span>
+                    <h3><?php echo htmlspecialchars($pand['title']); ?></h3>
                     <ul class="pand-info">
-                        <li>Locatie A - Begane Grond</li>
-                        <li>125 m²</li>
+                        <li><?php echo htmlspecialchars($pand['location']); ?></li>
+                        <li><?php echo htmlspecialchars($pand['size']); ?></li>
                     </ul>
-                    <p>Moderne winkelruimte in het hart van het winkelcentrum met veel daglicht en uitstekende zichtbaarheid.</p>
-                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/ruime-winkelunit-centrum'">Meer Informatie</button>
+                    <p><?php echo htmlspecialchars($pand['summary']); ?></p>
+                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/<?php echo htmlspecialchars($slug); ?>'">Meer Informatie</button>
                 </div>
-                <div class="pand-card">
-                    <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Hoekpand met Etalage"></div>
-                    <span class="pand-badge beschikbaar">Beschikbaar</span>
-                    <h3>Hoekpand met Etalage</h3>
-                    <ul class="pand-info">
-                        <li>Locatie B - Hoofdplein</li>
-                        <li>85 m²</li>
-                    </ul>
-                    <p>Strategisch gelegen hoekpand met extra etalageruimte en hoge voetgangersfrequentie.</p>
-                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/hoekpand-met-etalage'">Meer Informatie</button>
-                </div>
-                <div class="pand-card">
-                    <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Compacte Retail Space"></div>
-                    <span class="pand-badge bijna-beschikbaar">Binnenkort Beschikbaar</span>
-                    <h3>Compacte Retail Space</h3>
-                    <ul class="pand-info">
-                        <li>Locatie C - Zijgang</li>
-                        <li>55 m²</li>
-                    </ul>
-                    <p>Ideale ruimte voor specialty retail of dienstverlening, volledig gerenoveerd.</p>
-                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/compacte-retail-space'">Meer Informatie</button>
-                </div>
-                <div class="pand-card">
-                    <div class="pand-image"><img src="/public/assets/leegpandhamershof.png" alt="Premium Winkelruimte"></div>
-                    <span class="pand-badge beschikbaar">Beschikbaar</span>
-                    <h3>Premium Winkelruimte</h3>
-                    <ul class="pand-info">
-                        <li>Locatie D - Entree Gebied</li>
-                        <li>180 m²</li>
-                    </ul>
-                    <p>Grote winkelunit met hoge plafonds en flexibele indeling, perfect voor flagship stores.</p>
-                    <button type="button" class="meer-info-btn" onclick="location.href='/tehuur/premium-winkelruimte'">Meer Informatie</button>
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 
@@ -118,10 +87,9 @@
                         <label for="shopName">Geïnteresseerd in</label>
                         <select id="shopName" name="shop_name">
                             <option value="">Selecteer een pand</option>
-                            <option value="Ruime Winkelunit Centrum">Ruime Winkelunit Centrum</option>
-                            <option value="Hoekpand met Etalage">Hoekpand met Etalage</option>
-                            <option value="Compacte Retail Space">Compacte Retail Space</option>
-                            <option value="Premium Winkelruimte">Premium Winkelruimte</option>
+                            <?php foreach ($properties as $slug => $pand): ?>
+                            <option value="<?php echo htmlspecialchars($pand['title']); ?>"><?php echo htmlspecialchars($pand['title']); ?></option>
+                            <?php endforeach; ?>
                             <option value="Anders">Anders</option>
                         </select>
                     </div>

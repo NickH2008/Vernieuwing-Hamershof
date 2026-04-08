@@ -17,6 +17,7 @@ class tehuurController
      */
     public function index()
     {
+        $properties = $this->getProperties();
         require __DIR__ . '/../public/tehuur.php';
     }
 
@@ -50,8 +51,7 @@ class tehuurController
      */
     public function showProperty($slug)
     {
-        $properties = $this->getProperties();
-        $pand = $properties[$slug] ?? null;
+        $pand = $this->getPropertyBySlug($slug);
 
         if (!$pand) {
             http_response_code(404);
@@ -59,97 +59,64 @@ class tehuurController
             return;
         }
 
+        // Parse JSON fields
+        $pand['features'] = json_decode($pand['features'], true) ?? [];
+        $pand['details'] = json_decode($pand['details'], true) ?? [];
+        $pand['statusClass'] = $pand['status_class'];
+        $pand['availability'] = $pand['availability'];
+
         $selectedShop = $pand['title'];
         require __DIR__ . '/../public/pand_detail.php';
     }
 
+    /**
+     * Get all properties from database
+     */
     private function getProperties()
     {
-        return [
-            'ruime-winkelunit-centrum' => [
-                'title' => 'Ruime Winkelunit Centrum',
-                'location' => 'Locatie A - Begane Grond',
-                'size' => '125 m²',
-                'availability' => 'Beschikbaar',
-                'statusClass' => 'beschikbaar',
-                'image' => '/public/assets/leegpandhamershof.png',
-                'summary' => 'Moderne winkelruimte in het hart van het winkelcentrum met veel daglicht en uitstekende zichtbaarheid.',
-                'description' => 'Deze ruime winkelunit biedt een royale etalage, een hoge plafonds en een flexibele indeling voor conceptstores, mode of lifestyle-formules.',
-                'features' => [
-                    'Ruime gevel met veel zichtbaarheid',
-                    'Directe toegang vanaf de begane grond',
-                    'Hoge voetgangersstroom en centrale locatie',
-                ],
-                'details' => [
-                    'Huurprijs' => 'Op aanvraag',
-                    'Oppervlakte' => '125 m²',
-                    'Verdieping' => 'Begane grond',
-                    'Parkeerplaatsen' => 'Inclusief parkeermogelijkheden',
-                ],
-            ],
-            'hoekpand-met-etalage' => [
-                'title' => 'Hoekpand met Etalage',
-                'location' => 'Locatie B - Hoofdplein',
-                'size' => '85 m²',
-                'availability' => 'Beschikbaar',
-                'statusClass' => 'beschikbaar',
-                'image' => '/public/assets/leegpandhamershof.png',
-                'summary' => 'Strategisch gelegen hoekpand met extra etalageruimte en hoge voetgangersfrequentie.',
-                'description' => 'Een aantrekkelijke hoeklocatie die perfect is voor visuele concepten, horeca of specialistische retail met veel zichtbaarheid.',
-                'features' => [
-                    'Grote hoeketalage',
-                    'Hoge passage van bezoekers',
-                    'Veel lichtinval en presentatie mogelijkheden',
-                ],
-                'details' => [
-                    'Huurprijs' => 'Op aanvraag',
-                    'Oppervlakte' => '85 m²',
-                    'Verdieping' => 'Begane grond',
-                    'Parkeerplaatsen' => 'Ruime parkeermogelijkheid nabij',
-                ],
-            ],
-            'compacte-retail-space' => [
-                'title' => 'Compacte Retail Space',
-                'location' => 'Locatie C - Zijgang',
-                'size' => '55 m²',
-                'availability' => 'Binnenkort Beschikbaar',
-                'statusClass' => 'bijna-beschikbaar',
-                'image' => '/public/assets/leegpandhamershof.png',
-                'summary' => 'Ideale ruimte voor specialty retail of dienstverlening, volledig gerenoveerd.',
-                'description' => 'Een compact pand met moderne afwerking, uitstekend geschikt voor conceptstores, beauty of dienstverlening met een warme uitstraling.',
-                'features' => [
-                    'Gerenoveerde winkelruimte',
-                    'Ideaal voor niche-concepten',
-                    'Verhoogde exposure in een drukke zijgang',
-                ],
-                'details' => [
-                    'Huurprijs' => 'Op aanvraag',
-                    'Oppervlakte' => '55 m²',
-                    'Verdieping' => 'Begane grond',
-                    'Parkeerplaatsen' => '450+ parkeerplaatsen in nabijheid',
-                ],
-            ],
-            'premium-winkelruimte' => [
-                'title' => 'Premium Winkelruimte',
-                'location' => 'Locatie D - Entree Gebied',
-                'size' => '180 m²',
-                'availability' => 'Beschikbaar',
-                'statusClass' => 'beschikbaar',
-                'image' => '/public/assets/leegpandhamershof.png',
-                'summary' => 'Grote winkelunit met hoge plafonds en flexibele indeling, perfect voor flagship stores.',
-                'description' => 'Deze premium ruimte biedt een representatieve uitstraling en veel flexibiliteit voor formules die ruimte en impact nodig hebben.',
-                'features' => [
-                    'Hoge plafonds en open zichtlijnen',
-                    'Ruime winkelvloer',
-                    'Achterruimte geschikt voor opslag of kantoor',
-                ],
-                'details' => [
-                    'Huurprijs' => 'Op aanvraag',
-                    'Oppervlakte' => '180 m²',
-                    'Verdieping' => 'Begane grond',
-                    'Parkeerplaatsen' => 'Gemakkelijke toegang tot entree en parkeergelegenheid',
-                ],
-            ],
-        ];
+        $sql = "SELECT * FROM properties ORDER BY id ASC";
+        $results = $this->tehuurService->db->read($sql);
+        
+        if (!$results) {
+            return [];
+        }
+
+        $properties = [];
+        foreach ($results as $row) {
+            $slug = $row['slug'];
+            $properties[$slug] = [
+                'title' => $row['title'],
+                'location' => $row['location'],
+                'size' => $row['size'],
+                'availability' => $row['availability'],
+                'statusClass' => $row['status_class'],
+                'image' => $row['image'],
+                'summary' => $row['summary'],
+                'description' => $row['description'],
+                'features' => json_decode($row['features'], true) ?? [],
+                'details' => json_decode($row['details'], true) ?? [],
+            ];
+        }
+
+        return $properties;
+    }
+
+    /**
+     * Get a single property by slug from database
+     */
+    private function getPropertyBySlug($slug)
+    {
+        $sql = "SELECT * FROM properties WHERE slug = ?";
+        $result = $this->tehuurService->db->read($sql, [$slug]);
+        return $result ? $result[0] : null;
+    }
+
+    /**
+     * Get all properties for select dropdown
+     */
+    public function getAllPropertiesForSelect()
+    {
+        $sql = "SELECT id, title FROM properties ORDER BY id ASC";
+        return $this->tehuurService->db->read($sql);
     }
 }
