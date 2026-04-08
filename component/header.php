@@ -44,14 +44,14 @@
 
         <nav class="menu-nav" aria-label="Hoofdmenu">
             <ul>
-                <li><a href="../public/home.php">Home</a></li>
-                <li><a href="../public/tehuur.php">Te Huur</a></li>
-                <li><a href="#">Plattegrond</a></li>
-                <li><a href="#">Nieuws</a></li>
-                <li><a href="../public/agenda.php">Agenda</a></li>
-                <li><a href="#">Markten</a></li>
-                <li><a href="#">Hamershofbon</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="home">Home</a></li>
+                <li><a href="tehuur">Te Huur</a></li>
+                <li><a href="plattegrond">Plattegrond</a></li>
+                <li><a href="nieuws">Nieuws</a></li>
+                <li><a href="agenda">Agenda</a></li>
+                <li><a href="markten">Markten</a></li>
+                <li><a href="hamershofbon">Hamershofbon</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
         </nav>
 

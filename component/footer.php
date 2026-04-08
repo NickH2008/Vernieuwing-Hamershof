@@ -19,16 +19,16 @@
             <h3>Quick links</h3>
             <div class="footer-links-grid">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Te Huur</a></li>
-                    <li><a href="#">Plattegrond</a></li>
-                    <li><a href="#">Nieuws</a></li>
-                    <li><a href="#">Agenda</a></li>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="tehuur">Te Huur</a></li>
+                    <li><a href="plattegrond">Plattegrond</a></li>
+                    <li><a href="nieuws">Nieuws</a></li>
+                    <li><a href="agenda">Agenda</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#">Markten</a></li>
-                    <li><a href="#">Hamershofbon</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="markten">Markten</a></li>
+                    <li><a href="hamershofbon">Hamershofbon</a></li>
+                    <li><a href="contact">Contact</a></li>
                 </ul>
             </div>
 
