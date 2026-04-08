@@ -50,14 +50,14 @@ if(registerForm){
         })
             .then(res => res.json())
             .then(data => {
-                    console.log("Debug: response data", data);
-                    if (data.status === "success") {
-                        alert("Winkel succesvol toegevoegd!");
-                        registerForm.reset();
-                    } else {
-                        alert("Fout: " + data.message);
-                    }
-                })
+                console.log("Debug: response data", data);
+                if (data.status === "success") {
+                    alert("Winkel succesvol toegevoegd!");
+                    registerForm.reset();
+                } else {
+                    alert("Fout: " + data.message);
+                }
+            })
             .catch(err => {
                 console.error("Error adding winkel:", err);
                 alert("Er is een fout opgetreden bij het toevoegen van de winkel.");

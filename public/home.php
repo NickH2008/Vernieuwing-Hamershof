@@ -67,7 +67,52 @@
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../component/footer.php'; ?>
+<div class="our-shops">
+    <h1>Onze Winkels</h1>
+    <p>Van mode tot horeca, van dagelijkse boodschappen tot bijzondere cadeaus. </p>
+    <p>Ontdek ons uitgebreide aanbod.</p>
+    <div class="shop-buttons">
+        <div id="shop-button-1"></div>
+        <div id="shop-button-2"></div>
+        <div id="shop-button-3"></div>
+        <div id="shop-button-4"></div>
+        <div id="shop-button-5"></div>
+        <div id="shop-button-6"></div>
+    </div>
 
+    <h2>Uitgelichte Winkels</h2>
+    <div class="featured-shops">
+        <div class="shop-card">
+            <img src="/public/assets/shop1.png" alt="Shop 1" class="shop-image">
+            <p class="shop-type">Mode</p>
+            <p class="shop-time">OPEN till 15:00</p>
+            <p class="shop-title">Fashion District</p>
+            <p class="shop-description">Trendy kleding voor jong en oud.</p>
+        </div>
+
+        <div class="shop-card">
+            <img src="/public/assets/shop2.png" alt="Shop 2" class="shop-image">
+            <p class="shop-type">Horeca</p>
+            <p class="shop-time">OPEN till 18:00</p>
+            <p class="shop-title">Café Central</p>
+            <p class="shop-description">De beste koffie in de buurt.</p>
+        </div>
+
+        <div class="shop-card">
+            <img src="/public/assets/shop3.png" alt="Shop 3" class="shop-image">
+            <p class="shop-type">Restaurant</p>
+            <p class="shop-time">OPEN till 24:00</p>
+            <p class="shop-title">Restaurant Plaza</p>
+            <p class="shop-description">Internationale Gerechten.</p>
+        </div>
+    </div>
+
+    <button class="view-all-shops-btn">
+        Bekijk alle winkels
+    </button>
+</div>
+
+
+<?php require_once __DIR__ . '/../component/footer.php'; ?>
 </body>
 </html>
