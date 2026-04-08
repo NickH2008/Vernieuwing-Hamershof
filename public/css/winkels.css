@@ -7,6 +7,13 @@
         justify-content: center;
         font-family: var(--title-font);
         width: 10rem;
+        padding: 0.5rem 1rem;
+        border: 2px solid #111;
+        background: transparent;
+        color: #111;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        margin-right: 1rem;
     }
 }
 
