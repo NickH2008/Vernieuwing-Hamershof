@@ -1,14 +1,37 @@
+#zoek-wrapper{
+    display: flex;
+    margin: 2rem 1rem;
+    button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--title-font);
+        width: 10rem;
+        padding: 0.5rem 1rem;
+        border: 2px solid #111;
+        background: transparent;
+        color: #111;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        margin-right: 1rem;
+    }
+}
+
+#zoek-wrapper button.active {
+    background: #111;
+    color: white;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     gap: 16px;
-    padding: 1rem 0;
+    padding: 3rem 7rem;
 }
 
 .card {
     background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    border: 2px solid black;
     overflow: hidden;
     transition: border-color 0.2s;
     list-style: none;
@@ -19,14 +42,12 @@
     height:50px;
     object-fit:contain;
     position: relative;
-    left: 80%;
+    left: 100%;
 }
-
-.card:hover { border-color: #9ca3af; }
 
 .card-cover {
     width: 100%;
-    height: 160px;
+    height: 300px;
     object-fit: cover;
     display: block;
     background: #f3f4f6;
