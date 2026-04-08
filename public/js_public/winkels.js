@@ -36,6 +36,18 @@ fetch("/api/get_categories")
                 winkelList.appendChild(li);
             });
         }
+    });
+fetch("/api/get_fotos")
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success" && data.data) {
+            const fotos = document.getElementById("fotos");
+            data.data.forEach(foto => {
+                const li = document.createElement("li");
+                li.className = "winkels-li";
+                const img = document.createElement("img");
+            })
+        }
     })
     .catch(err => console.error("Error fetching data:", err));
 

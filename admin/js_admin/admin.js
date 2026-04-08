@@ -19,6 +19,22 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(err => console.error("Error loading categories:", err));
 });
 
+fetch("/api/get_fotos")
+    .then(res => res.json())
+    .then(data => {
+        console.log("Debug: foto's loaded", data);
+        if (data.status === "success" && data.data) {
+            const selectElement = document.getElementById("foto_id");
+            selectElement.innerHTML = '';
+            data.data.forEach(category => {
+                const option = document.createElement("foto");
+                option.value = category.foto_id;
+                option.textContent = category.foto_name;
+                selectElement.appendChild(option);
+            });
+        }
+    })
+
 const registerForm = document.getElementById("registerForm");
 if(registerForm){
     registerForm.addEventListener("submit", function(e){

@@ -10,6 +10,7 @@ class winkelsController
         $router->post('/admin/create', [$this, 'create']);
         $router->get('/api/get_winkels', [$this, 'get_winkels']);
         $router->get('/api/get_categories', [$this, 'get_categories']);
+        $router->get('/api/get_fotos', [$this, 'get_fotos']);
         $this->db = new databaseController();
     }
 
@@ -25,12 +26,15 @@ class winkelsController
         $winkelnaam = $_POST['winkel_name'] ?? '';
         $categorie = $_POST['category_id'] ?? '';
         $description = $_POST['description'] ?? '';
-        $logo = $_POST['logo'] ?? '';
-        $image = $_FILES['picture']['name'] ?? '';
+        $logo = $_FILES['logo']['name'] ?? '';
+        $image = $_FILES['cover_image']['name'] ?? '';
         $phone = $_POST['phone'] ?? '';
         $email = $_POST['email'] ?? '';
         $website = $_POST['website'] ?? '';
         $location = $_POST['location'] ?? '';
+        $image_id = $_POST['image_id'] ?? '';
+        $winkel_id = $_POST['winkel_id'] ?? '';
+        $image_path = $_POST['image_path'] ?? '';
 
         if (empty($winkelnaam)) {
             echo json_encode([
@@ -43,14 +47,17 @@ class winkelsController
         $sql = "INSERT INTO winkels (winkel_name, category_id, description, logo, cover_image, phone, email, website, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $result = $this->db->save($sql, [$winkelnaam, $categorie, $description, $logo, $image, $phone, $email, $website, $location]);
 
-        if ($result) {
+        $sql = "INSERT INTO winkel_images (winkel_id, image_path) VALUES (?, ?)";
+        $result_foto = $this->db->save($sql, [$image_id, $winkel_id, $image_path]);
+
+        if ($result && $result_foto) {
             echo json_encode([
                 "status" => "success",
                 "message" => "Winkel succesvol aangemaakt"
             ]);
         } else {
             echo json_encode([
-                "status" => "error",
+                "status" => "error" ,
                 "message" => "Er is een fout opgetreden bij het opslaan"
             ]);
         }
