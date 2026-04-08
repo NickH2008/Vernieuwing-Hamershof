@@ -5,6 +5,7 @@ const calendarDays = document.querySelector(".calendar-days");
 const monthYear = document.querySelector(".month-year h1");
 const prevBtn = document.querySelector(".prev-month");
 const nextBtn = document.querySelector(".next-month");
+const listContainer = document.querySelector(".list-container");
 
 let currentDate = new Date();
 let agendaEvents = [];
@@ -16,7 +17,7 @@ function fetchAgenda() {
     return fetch('/api/agenda')
         .then(response => response.json())
         .then(result => {
-            // ✅ your API returns { status, data }
+            // API returns { status, data }
             agendaEvents = Array.isArray(result.data) ? result.data : [];
         })
         .catch(error => console.error('Error fetching agenda:', error));
@@ -43,7 +44,7 @@ function renderCalendar(date) {
     // Days in month
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Empty slots before first day
+    // Empty slots
     for (let i = 0; i < startDay; i++) {
         calendarDays.innerHTML += `<div class="empty"></div>`;
     }
@@ -80,7 +81,7 @@ function renderCalendar(date) {
                     ${isToday ? 'Vandaag' : day}
                 </span>
                 <div class="events">
-                ${eventsHtml}
+                    ${eventsHtml}
                 </div>
             </div>
         `;
@@ -88,16 +89,62 @@ function renderCalendar(date) {
 }
 
 /* ==============================
+   RENDER LIST (ONLY TIMED EVENTS)
+============================== */
+function renderAgendaList(date) {
+    listContainer.innerHTML = "";
+
+    const year = date.getFullYear();
+    const month = date.getMonth(); // 0-based
+
+    const timedEvents = agendaEvents.filter(event => {
+        if (!event.created_at) return false;
+
+        const eventDate = new Date(event.created_at.replace(' ', 'T'));
+
+        return (
+            eventDate.getFullYear() === year &&
+            eventDate.getMonth() === month &&
+            eventDate.getHours() + eventDate.getMinutes() > 0
+        );
+    });
+
+    if (timedEvents.length === 0) {
+        listContainer.innerHTML = `<p>No scheduled events this month</p>`;
+        return;
+    }
+
+    timedEvents.sort((a, b) =>
+        new Date(a.created_at) - new Date(b.created_at)
+    );
+
+    timedEvents.forEach(event => {
+        const [datePart, timePart] = event.created_at.split(' ');
+        const displayDateTime = `${datePart} ${timePart.slice(0, 5)}`;
+
+        listContainer.innerHTML += `
+            <div class="list-event" style="background:${event.color}">
+                <span class="list-title">${event.activity_name}</span>
+                <span class="list-time">${displayDateTime}</span>
+            </div>
+        `;
+    });
+}
+
+
+/* ==============================
    NAVIGATION
 ============================== */
 prevBtn.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     renderCalendar(currentDate);
+    renderAgendaList(currentDate);
 });
 
 nextBtn.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar(currentDate);
+    renderAgendaList(currentDate);
 });
 
 /* ==============================
@@ -106,4 +153,26 @@ nextBtn.addEventListener("click", () => {
 (async function initCalendar() {
     await fetchAgenda();
     renderCalendar(currentDate);
+    renderAgendaList(currentDate);
 })();
+
+const calenderBtn = document.querySelector(".calendar-btn");
+const listBtn = document.querySelector(".list-btn");
+const calendarView = document.querySelector(".calendar-days");
+const listView = document.querySelector(".list-container");
+const weekdayHeader = document.querySelector(".week");
+calenderBtn.addEventListener("click", () => {
+    calendarView.style.display = "grid";
+    listView.style.display = "none";
+    calenderBtn.classList.add("active");
+    listBtn.classList.remove("active");
+    weekdayHeader.style.display = "grid";
+});
+
+listBtn.addEventListener("click", () => {
+    weekdayHeader.style.display = "none";
+    calendarView.style.display = "none";
+    listView.style.display = "grid";
+    listBtn.classList.add("active");
+    calenderBtn.classList.remove("active");
+});

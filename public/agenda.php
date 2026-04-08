@@ -17,7 +17,7 @@
 <main>
     <div class="page-title-container">
         <h1>Agenda</h1>
-        <p>Oeps! De pagina die je zoekt bestaat niet.</p>
+        <p>Ontdek alle activiteiten en evenementen</p>
     </div>
     <section class="agenda-events">
         <div id="calendar-type-buttons">
@@ -82,7 +82,11 @@
             <div class="calendar-days">
 
             </div>
+            <div class="list-container">
+
+            </div>
         </div>
+
     </section>
 
 </main>
