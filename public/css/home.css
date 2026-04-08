@@ -192,6 +192,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 17rem;
     width: 100vw;
     display: flex;
+    align-items: stretch;
     padding-top: 3%;
 }
 
@@ -205,6 +206,51 @@ h1, h2, h3, h4, h5, h6 {
     height: 11vw;
     background-color: white;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.35rem;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    color: #000;
+}
+
+#shop-button-1 .shop-icon,
+#shop-button-2 .shop-icon,
+#shop-button-3 .shop-icon,
+#shop-button-4 .shop-icon,
+#shop-button-5 .shop-icon,
+#shop-button-6 .shop-icon {
+    width: 1.45rem;
+    height: 1.45rem;
+    display: block;
+    color: #000;
+}
+
+#shop-button-1 h1,
+#shop-button-2 h1,
+#shop-button-3 h1,
+#shop-button-4 h1,
+#shop-button-5 h1,
+#shop-button-6 h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 0.75rem;
+    padding: 0;
+}
+
+#shop-button-1 p,
+#shop-button-2 p,
+#shop-button-3 p,
+#shop-button-4 p,
+#shop-button-5 p,
+#shop-button-6 p {
+    font-size: 0.9rem;
+    line-height: 1.1;
+    margin-top: 0.5rem;
 }
 
 .view-all-shops-btn {
