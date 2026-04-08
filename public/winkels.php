@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,13 +25,13 @@
 <h1>hoi</h1>
 <input type="text" id="searchInput" placeholder="Zoek een winkel">
 <div id="zoek-wrapper">
-    <button>alle winkels</button>
-    <button>mode&accesoires</button>
-    <button>eten&drinken</button>
-    <button>supermarkt</button>
-    <button>electronica</button>
-    <button>wonen&livestyle</button>
-    <button>restaurant</button>
+    <button data-category="all">alle winkels</button>
+    <button data-category="1">mode & accessoires</button>
+    <button data-category="2">eten & drinken</button>
+    <button data-category="3">supermarkt</button>
+    <button data-category="4">electronica</button>
+    <button data-category="5">wonen & lifestyle</button>
+    <button data-category="6">restaurant</button>
 </div>
 <hr>
 
