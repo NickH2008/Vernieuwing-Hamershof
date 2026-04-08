@@ -38,9 +38,7 @@
 
 <div id="found"></div>
 
-<ul id="winkelList">
-    <!-- hier komen de winkels -->
-</ul>
+<ul class="grid" id="winkelList"></ul>
 
 <?php include_once __DIR__ . '/../component/footer.php'; ?>
 

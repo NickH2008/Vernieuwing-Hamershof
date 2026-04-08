@@ -26,40 +26,51 @@ class winkelsController
         $winkelnaam = $_POST['winkel_name'] ?? '';
         $categorie = $_POST['category_id'] ?? '';
         $description = $_POST['description'] ?? '';
-        $logo = $_FILES['logo']['name'] ?? '';
-        $image = $_FILES['cover_image']['name'] ?? '';
         $phone = $_POST['phone'] ?? '';
         $email = $_POST['email'] ?? '';
         $website = $_POST['website'] ?? '';
         $location = $_POST['location'] ?? '';
-        $image_id = $_POST['image_id'] ?? '';
-        $winkel_id = $_POST['winkel_id'] ?? '';
-        $image_path = $_POST['image_path'] ?? '';
 
         if (empty($winkelnaam)) {
-            echo json_encode([
-                "status" => "error",
-                "message" => "Winkelnaam ontbreekt"
-            ]);
+            echo json_encode(["status" => "error", "message" => "Winkelnaam ontbreekt"]);
             exit;
         }
 
+        // 1. EERST uploads verwerken
+        $uploadDir = __DIR__ . '/../uploads/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $image = '';
+        if (!empty($_FILES['cover_image']['name'])) {
+            $image = 'uploads/' . basename($_FILES['cover_image']['name']);
+            move_uploaded_file($_FILES['cover_image']['tmp_name'], $uploadDir . basename($_FILES['cover_image']['name']));
+        }
+
+        $logo = '';
+        if (!empty($_FILES['logo']['name'])) {
+            $logo = 'uploads/' . basename($_FILES['logo']['name']);
+            move_uploaded_file($_FILES['logo']['tmp_name'], $uploadDir . basename($_FILES['logo']['name']));
+        }
+
+        // 2. DAN opslaan in database
         $sql = "INSERT INTO winkels (winkel_name, category_id, description, logo, cover_image, phone, email, website, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $result = $this->db->save($sql, [$winkelnaam, $categorie, $description, $logo, $image, $phone, $email, $website, $location]);
 
-        $sql = "INSERT INTO winkel_images (winkel_id, image_path) VALUES (?, ?)";
-        $result_foto = $this->db->save($sql, [$image_id, $winkel_id, $image_path]);
+        $newWinkelId = $this->db->lastInsertId();
 
-        if ($result && $result_foto) {
-            echo json_encode([
-                "status" => "success",
-                "message" => "Winkel succesvol aangemaakt"
-            ]);
+        // 3. Foto opslaan in winkel_images
+        $result_foto = true;
+        if (!empty($image)) {
+            $sql = "INSERT INTO winkel_images (winkel_id, image_path) VALUES (?, ?)";
+            $result_foto = $this->db->save($sql, [$newWinkelId, $image]);
+        }
+
+        if ($result) {
+            echo json_encode(["status" => "success", "message" => "Winkel succesvol aangemaakt"]);
         } else {
-            echo json_encode([
-                "status" => "error" ,
-                "message" => "Er is een fout opgetreden bij het opslaan"
-            ]);
+            echo json_encode(["status" => "error", "message" => "Er is een fout opgetreden bij het opslaan"]);
         }
     }
 
@@ -80,12 +91,28 @@ class winkelsController
     {
         header("Content-Type: application/json");
 
-        $sql = "SELECT * FROM winkels";
+        $sql = "SELECT w.*, GROUP_CONCAT(wi.image_path) as fotos 
+            FROM winkels w 
+            LEFT JOIN winkel_images wi ON w.winkel_id = wi.winkel_id 
+            GROUP BY w.winkel_id";
         $winkels = $this->db->read($sql);
 
         echo json_encode([
             "status" => "success",
             "data" => $winkels
+        ]);
+    }
+
+    public function get_fotos()
+    {
+        header("Content-Type: application/json");
+
+        $sql = "SELECT * FROM winkel_images";
+        $fotos = $this->db->read($sql);
+
+        echo json_encode([
+            "status" => "success",
+            "data" => $fotos
         ]);
     }
 
