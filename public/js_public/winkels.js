@@ -1,53 +1,48 @@
-let categoryMap = {};
+const categoryMap = {};
 
-// First, load categories
 fetch("/api/get_categories")
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === "success" && data.data) {
-            data.data.forEach(category => {
-                categoryMap[category.category_id] = category.category_name;
-            });
+    .then(r => r.json())
+    .then(d => {
+        if (d.status === "success" && d.data) {
+            d.data.forEach(c => categoryMap[c.category_id] = c.category_name);
         }
-        // Then load winkels after categories are loaded
         return fetch("/api/get_winkels");
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log("Winkels data:", data);
-        if (data.status === "success" && data.data) {
-            const winkelList = document.getElementById("winkelList");
-            data.data.forEach(winkel => {
+    .then(r => r.json())
+    .then(d => {
+        if (d.status === "success" && d.data) {
+            const list = document.getElementById("winkelList");
+            d.data.forEach(w => {
                 const li = document.createElement("li");
-                li.className = "winkels-li";
+                li.className = "card";
 
-                const img = document.createElement("img");
-                img.src = winkel.cover_image;
-                img.style.width = "100px";
-                img.style.height = "100px";
-                img.style.padding = "15px";
+                const coverSrc = w.cover_image ? "/" + w.cover_image : null;
+                const logoSrc = w.logo ? "/" + w.logo : null;
+                const coverHTML = coverSrc
+                    ? `<img class="card-cover" src="${coverSrc}" alt="${w.winkel_name}">`
+                    : `<div class="card-cover-placeholder">Geen afbeelding</div>`;
 
-                const categoryName = categoryMap[winkel.category_id] || "Onbekend";
-                const text = document.createTextNode(winkel.winkel_name + " - " + categoryName);
+                const catName = categoryMap[w.category_id] || "Onbekend";
+                const desc = w.description || "";
 
-                li.appendChild(img);
-                li.appendChild(text);
+                const fotosHTML = w.fotos
+                    ? w.fotos.split(",").map(p =>
+                        `<img src="/${p.trim()}" alt="foto van ${w.winkel_name}">`
+                    ).join("")
+                    : "";
 
-                winkelList.appendChild(li);
+                li.innerHTML = `
+    ${coverHTML}
+    <div class="card-body">
+        ${logoSrc ? `<img src="${logoSrc}" class="logo-img" alt="logo van ${w.winkel_name}">` : ""}
+        <p class="card-name">${w.winkel_name}</p>
+        <span class="card-category">${catName}</span>
+        ${desc ? `<p class="card-desc">${desc}</p>` : ""}
+    </div>
+`;
+
+                list.appendChild(li);
             });
         }
-    });
-fetch("/api/get_fotos")
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === "success" && data.data) {
-            const fotos = document.getElementById("fotos");
-            data.data.forEach(foto => {
-                const li = document.createElement("li");
-                li.className = "winkels-li";
-                const img = document.createElement("img");
-            })
-        }
     })
-    .catch(err => console.error("Error fetching data:", err));
-
+    .catch(err => console.error("Fout:", err));

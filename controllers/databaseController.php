@@ -49,4 +49,9 @@ class databaseController
         }
     }
 
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
+
 }
