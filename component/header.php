@@ -49,8 +49,8 @@
                 <li><a href="plattegrond">Plattegrond</a></li>
                 <li><a href="nieuws">Nieuws</a></li>
                 <li><a href="agenda">Agenda</a></li>
-                <li><a href="winkels">winkels</a></li>
-                <li><a href="evenementen">evenementen</a></li>
+                <li><a href="winkels">Winkels</a></li>
+                <li><a href="evenementen">Evenementen</a></li>
                 <li><a href="contact">Contact</a></li>
             </ul>
         </nav>
