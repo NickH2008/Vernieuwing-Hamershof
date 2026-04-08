@@ -165,3 +165,141 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.4rem;
     margin-bottom: 2rem;
 }
+
+/*------------------------- onze winkels box -------------------------*/
+.our-shops {
+    height: 120vh;
+    width: 100vw;
+    background-color: #F3F3F3;
+    text-align: center;
+}
+
+.our-shops h1 {
+    font-size: 4rem;
+    padding: 1.5rem 0 1rem 0;
+}
+
+.our-shops p {
+    font-size: 1.4rem;
+}
+
+.our-shops h2{
+    font-size: 2rem;
+    padding-top: 5rem;
+}
+
+.shop-buttons {
+    height: 17rem;
+    width: 100vw;
+    display: flex;
+    padding-top: 3%;
+}
+
+#shop-button-1,
+#shop-button-2,
+#shop-button-3,
+#shop-button-4,
+#shop-button-5,
+#shop-button-6 {
+    width: 13vw;
+    height: 11vw;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.view-all-shops-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    margin-top: 2.5rem;
+    padding: 1rem 2rem;
+    font-family: var(--title-font);
+}
+
+.featured-shops{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7rem;
+    margin: 0 auto;
+    padding: 2rem 2rem 0;
+}
+
+.shop-card{
+    width: min(100%, 22rem);
+    background-color: white;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+}
+
+.shop-card img{
+    width: calc(100% + 2px);
+    height: auto;
+    display: block;
+    margin: -1px -1px 0;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid #000;
+}
+
+.shop-card > p{
+    margin: 0;
+    padding: 0 1rem;
+}
+
+.shop-card .shop-time,
+.shop-card .shop-title{
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.shop-card .shop-type,
+.shop-card .shop-description{
+    font-size: 0.875rem;
+    line-height: 1.35;
+}
+
+.shop-card .shop-type{
+    padding-top: 1rem;
+}
+
+.shop-card .shop-time{
+    padding-top: 0.4rem;
+}
+
+.shop-card .shop-title{
+    padding-top: 0.5rem;
+}
+
+.shop-card .shop-description{
+    padding: 0.45rem 1rem 1.25rem;
+}
+
+.shop-card:nth-child(1){
+    background-color: #E6E7E9;
+}
+
+.shop-card:nth-child(2){
+    background-color: #ffffff;
+}
+
+.shop-card:nth-child(3){
+    background-color: #000000;
+}
+
+.shop-card:nth-child(3) .shop-type,
+.shop-card:nth-child(3) .shop-time,
+.shop-card:nth-child(3) .shop-title,
+.shop-card:nth-child(3) .shop-description{
+    color: #ffffff;
+}
+
+.shop-card:nth-child(3) img{
+    border-bottom-color: #000;
+}
